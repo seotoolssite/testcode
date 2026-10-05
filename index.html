@@ -1488,11 +1488,10 @@
         position: relative;
       }
 
-            .diagram-scale-wrapper .stage {
-        transform: scale(0.5);
+                        .diagram-scale-wrapper .stage {
+        transform: translateX(76px) scale(0.5);
         transform-origin: top left;
         top: 16px;
-      }
 
       .link-diagram {
         max-width: 100%;
@@ -1598,10 +1597,9 @@
         height: 204px;
       }
 
-            .diagram-scale-wrapper .stage {
-        transform: scale(0.425);
+           .diagram-scale-wrapper .stage {
+        transform: translateX(76px) scale(0.425);
         top: 16px;
-      }
 
       .btn {
         padding: 12px 24px;
@@ -1681,14 +1679,6 @@
     transform: translateY(-50%);
     z-index: 2;
   }
-  .bulb-anchor {
-  position: absolute;
-  left: 21px;
-  top: -1px;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-}
 
   .node-wrap:hover .node{
     transform: translateY(-3px);
@@ -1890,7 +1880,6 @@
     <div class="node" id="publisher">Publisher
       <span class="edge edge-top"></span><span class="edge edge-right"></span>
       <span class="edge edge-bottom"></span><span class="edge edge-left"></span>
-      <span class="bulb-anchor"></span>
     </div>
   </div>
   <div class="node-wrap n-content" id="content-wrap" style="animation-delay:.2s">
@@ -2485,10 +2474,10 @@
   const segmentPaths = [];
 
     function anchorPoint(el, stageRect){
-  const anchor = el.querySelector('.bulb-anchor');
-  const r = anchor.getBoundingClientRect();
-  return { x: r.left + r.width/2 - stageRect.left, y: r.top + r.height/2 - stageRect.top };
-}
+    const r = el.getBoundingClientRect();
+    const scaleFactor = stageRect.width / 640;
+    return { x: r.left - stageRect.left + (25 * scaleFactor), y: r.top - stageRect.top };
+  }
 
   function draw(){
     const svg = document.getElementById('lines');
